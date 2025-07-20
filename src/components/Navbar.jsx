@@ -3,25 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 
-function Navbar() {
+function Navbar({ searchTerm, setSearchTerm }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/search?query=${searchTerm}`);
-      setSearchTerm("");
-      setIsOpen(false); // close mobile menu on search
-    }
-  };
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   if (searchTerm.trim()) {
+  //     navigate(`/search?query=${searchTerm}`);
+  //     setSearchTerm("");
+  //     setIsOpen(false); // close mobile menu on search
+  //   }
+  // };
 
   return (
     <nav className="bg-secondary2 shadow-sm sticky top-0 z-50">
@@ -44,7 +44,6 @@ function Navbar() {
           {/* Desktop nav and search */}
           <div className="hidden md:flex items-center space-x-4">
             {/* Search bar (desktop) */}
-            <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
                 placeholder="Search..."
@@ -58,7 +57,6 @@ function Navbar() {
               >
                 <Search size={16} />
               </button>
-            </form>
 
             {/* Nav links */}
             <Link to="/" className="text-gray-700 hover:text-pink-600">
@@ -99,9 +97,9 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pt-4 pb-4 space-y-2 bg-white shadow-sm">
+        <div className="md:hidden px-4 pt-4 pb-4 space-y-2 bg-white shadow-sm ${
+    isOpen ? 'translate-x-0' : '-translate-x-full'">
           {/* Search bar (mobile) */}
-          <form onSubmit={handleSearch} className="relative mb-4">
             <input
               type="text"
               placeholder="Search..."
@@ -115,7 +113,7 @@ function Navbar() {
             >
               <Search size={18} />
             </button>
-          </form>
+
 
           <Link to="/" className="block text-gray-700 hover:text-pink-600">
             Home
@@ -153,6 +151,7 @@ function Navbar() {
           )}
         </div>
       )}
+      
     </nav>
   );
 }

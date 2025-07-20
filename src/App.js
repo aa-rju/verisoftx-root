@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
@@ -24,15 +24,17 @@ import AdminOrders from "./pages/Admin/AdminOrders";
 import AdminUsers from "./pages/Admin/AdminUsers";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <Router>
         <div className="bg-secondary4 min-h-screen text-gray-800">
-          <Navbar />
+          <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          
           <div className="px-4 py-6">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home searchTerm={searchTerm} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/product/:id" element={<ProductDetails />} />
