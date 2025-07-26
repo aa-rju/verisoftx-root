@@ -119,6 +119,72 @@ app.post("/api/resend-otp", async (req, res) => {
   );
 });
 
+// forgot password logic
+app.post("/api/forgot_pass_otp", async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.json({ success: false, error: "Email is required." });
+
+  db.query("SELECT * FROM login_credentials WHERE email = ?", [email], (err, results) => {
+    if (err) return res.status(500).json({ success: false, error: "Database error." });
+    if (results.length === 0) {
+      return res.json({ success: false, error: "Email not found." });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    db.query(
+      "INSERT INTO signup_otp (email, otp, created_at) VALUES (?, ?, NOW())",
+      [email, otp],
+      async (err2) => {
+        if (err2) return res.status(500).json({ success: false, error: "Failed to save OTP." });
+
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
+
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: email,
+          subject: "Your Password Reset OTP",
+          text: `Your OTP code is: ${otp}`,
+        };
+
+        try {
+          await transporter.sendMail(mailOptions);
+          res.json({ success: true });
+        } catch (error) {
+          res.status(500).json({ success: false, error: "Failed to send OTP." });
+        }
+      }
+    );
+  });
+});
+
+// new password from forgot password logic
+app.post("/api/reset-password", (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ success: false, error: "Email and new password are required." });
+  }
+
+  // Update the password for the given email in login_credentials
+  db.query(
+    "UPDATE login_credentials SET password = ? WHERE email = ?",
+    [password, email],
+    (err, result) => {
+      if (err) return res.status(500).json({ success: false, error: "Database error." });
+      if (result.affectedRows === 0) {
+        return res.json({ success: false, error: "Email not found." });
+      }
+      res.json({ success: true });
+    }
+  );
+});
+
 // verify otp logic
 app.post("/api/verify-otp", (req, res) => {
   const { email, otp } = req.body;

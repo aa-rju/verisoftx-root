@@ -27,10 +27,116 @@ function Login() {
   const [signupError, setSignupError] = useState("");
   const [otpSent, setOtpSent] = useState(false);
 
-// otp verification state
+  // otp verification state
   const [enteredOtp, setEnteredOtp] = useState("");
   const [otpVerifyError, setOtpVerifyError] = useState("");
   const [verified, setVerified] = useState(false);
+
+  // forgot password popup window
+  const [showForgotPopup, setShowForgotPopup] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotError, setForgotError] = useState("");
+
+  const [forgotStep, setForgotStep] = useState("email"); // "email" | "otp" | "reset"
+  const [forgotOtp, setForgotOtp] = useState("");
+  const [forgotNewPassword, setForgotNewPassword] = useState("");
+  const [forgotConfirmPassword, setForgotConfirmPassword] = useState("");
+
+  // Handler for forgot password button
+const handleForgotPasswordClick = () => {
+  setShowForgotPopup(true);
+  setForgotEmail("");
+  setForgotError("");
+};
+
+// Handler for forgot password OTP generation
+const handleForgotGenerateOtp = async () => {
+  if (!emailRegex.test(forgotEmail)) {
+    setForgotError("Invalid email address");
+    return;
+  }
+  try {
+    const res = await fetch("http://localhost:5000/api/forgot_pass_otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: forgotEmail }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setForgotError("");
+      setForgotOtp("");
+      setForgotStep("otp"); // Move to OTP step
+      setPopup({ show: true, type: "success", message: "OTP sent to your email!" });
+    } else {
+      setForgotError(data.error || "Failed to send OTP. Try again.");
+    }
+  } catch {
+    setForgotError("Network error. Try again.");
+  }
+};
+
+// Handler to verify OTP and move to password reset step
+const handleForgotVerifyOtp = async () => {
+  if (!forgotOtp || forgotOtp.length !== 6) {
+    setForgotError("Enter the 6-digit OTP sent to your email.");
+    return;
+  }
+  try {
+    const res = await fetch("http://localhost:5000/api/verify-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: forgotEmail, otp: forgotOtp }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setForgotError("");
+      setForgotStep("reset"); // Move to password reset step
+      setPopup({ show: true, type: "success", message: "OTP verified! Please set your new password." });
+    } else {
+      setForgotError(data.error || "Invalid or expired OTP.");
+    }
+  } catch {
+    setForgotError("Network error. Try again.");
+  }
+};
+
+// Handler to reset password
+const handleForgotResetPassword = async () => {
+  if (!forgotNewPassword || !forgotConfirmPassword) {
+    setPopup({ show: true, type: "error", message: "Please fill in both password fields." });
+    return;
+  }
+  if (forgotNewPassword !== forgotConfirmPassword) {
+    setPopup({ show: true, type: "error", message: "Passwords do not match." });
+    return;
+  }
+  if (forgotNewPassword.length < 8) {
+    setPopup({ show: true, type: "error", message: "Password must be at least 8 characters long." });
+    return;
+  }
+  // Add your password strength validation here if needed
+  try {
+    const res = await fetch("http://localhost:5000/api/reset-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: forgotEmail, password: forgotNewPassword }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setShowForgotPopup(false);
+      setPopup({ show: true, type: "success", message: "Password changed successfully! Please login." });
+      setForgotStep("email");
+      setForgotEmail("");
+      setForgotOtp("");
+      setForgotNewPassword("");
+      setForgotConfirmPassword("");
+    } else {
+      setForgotError(data.error || "Failed to reset password.");
+    }
+  } catch {
+    setForgotError("Network error. Try again.");
+  }
+};
 
   // store email for OTP
   const [otpEmail, setOtpEmail] = useState("");
@@ -187,12 +293,13 @@ const handleResendOtp = async () => {
           </button>
         </form>
         <div className="flex justify-between mt-3 text-sm text-gray-600">
-          <button
-            className="text-pink-600 hover:underline"
-            disabled
-          >
-            Forgot Password?
-          </button>
+           <button
+          className="text-pink-600 hover:underline"
+          onClick={handleForgotPasswordClick}
+          type="button"
+        >
+          Forgot Password?
+        </button>
           <button
             className="text-pink-600 hover:underline"
             onClick={handleSignupClick}
@@ -301,6 +408,99 @@ const handleResendOtp = async () => {
     </div>
   </div>
 )}
+
+{/* Forgot Password Popup */}
+    {showForgotPopup && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+    <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative">
+      <button
+        className="absolute top-2 right-3 text-gray-400 hover:text-gray-700 text-xl"
+        onClick={() => {
+          setShowForgotPopup(false);
+          setForgotStep("email");
+          setForgotEmail("");
+          setForgotOtp("");
+          setForgotNewPassword("");
+          setForgotConfirmPassword("");
+          setForgotError("");
+        }}
+        aria-label="Close"
+      >
+        &times;
+      </button>
+      <h3 className="text-xl font-bold mb-4 text-pink-600">Forgot Password</h3>
+      {forgotStep === "email" && (
+        <>
+          <input
+            type="email"
+            value={forgotEmail}
+            onChange={e => setForgotEmail(e.target.value)}
+            placeholder="Enter your email address"
+            className="w-full border px-4 py-2 rounded mb-2 focus:ring-pink-500"
+          />
+          {forgotError && (
+            <div className="text-red-500 text-sm mb-2">{forgotError}</div>
+          )}
+          <button
+            onClick={handleForgotGenerateOtp}
+            className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700"
+          >
+            Send OTP
+          </button>
+        </>
+      )}
+      {forgotStep === "otp" && (
+        <>
+          <input
+            type="text"
+            value={forgotOtp}
+            onChange={e => setForgotOtp(e.target.value)}
+            maxLength={6}
+            placeholder="Enter OTP"
+            className="w-full border px-4 py-2 rounded mb-2 focus:ring-pink-500"
+          />
+          {forgotError && (
+            <div className="text-red-500 text-sm mb-2">{forgotError}</div>
+          )}
+          <button
+            onClick={handleForgotVerifyOtp}
+            className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700"
+          >
+            Change Password
+          </button>
+        </>
+      )}
+      {forgotStep === "reset" && (
+        <>
+          <input
+            type="password"
+            value={forgotNewPassword}
+            onChange={e => setForgotNewPassword(e.target.value)}
+            placeholder="New Password"
+            className="w-full border px-4 py-2 rounded mb-2 focus:ring-pink-500"
+          />
+          <input
+            type="password"
+            value={forgotConfirmPassword}
+            onChange={e => setForgotConfirmPassword(e.target.value)}
+            placeholder="Confirm New Password"
+            className="w-full border px-4 py-2 rounded mb-2 focus:ring-pink-500"
+          />
+          {forgotError && (
+            <div className="text-red-500 text-sm mb-2">{forgotError}</div>
+          )}
+          <button
+            onClick={handleForgotResetPassword}
+            className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700"
+          >
+            Reset Password
+          </button>
+        </>
+      )}
+    </div>
+  </div>
+)}
+
       {/* End Signup Popup */}
     </div>
   );
