@@ -53,26 +53,25 @@ export function AuthProvider({ children }) {
   };
 
   // Login function
-  const login = ({ email, password }) => {
-    const existingUser = users.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (!existingUser) {
-      return { error: "Invalid email or password." };
+const login = async ({ email, password }) => {
+  try {
+    const res = await fetch("http://localhost:5000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setUser(data.user); // Store full user object
+      localStorage.setItem("user", JSON.stringify(data.user));
+      return { success: true };
+    } else {
+      return { error: data.error };
     }
-
-    const loggedInUser = {
-      name: existingUser.name,
-      email: existingUser.email,
-      isAdmin: existingUser.isAdmin || false,
-    };
-
-    setUser(loggedInUser);
-    localStorage.setItem("user", JSON.stringify(loggedInUser));
-
-    return { success: true };
-  };
+  } catch (err) {
+    return { error: "Network error" };
+  }
+};
 
   // Logout function
   const logout = () => {

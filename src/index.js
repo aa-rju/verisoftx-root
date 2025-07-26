@@ -1,3 +1,4 @@
+// React app bootstrap, wraps app in context providers.
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";

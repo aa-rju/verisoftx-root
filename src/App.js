@@ -1,3 +1,4 @@
+// Main component, sets up routing and layout.
 import React,{useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -9,7 +10,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 
@@ -18,7 +19,6 @@ import AdminRequireAuth from "./components/AdminRequireAuth";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminProducts from "./pages/Admin/AdminProducts";
-// import AddProduct from "./pages/Admin/AddProduct";
 import EditProduct from "./pages/Admin/EditProduct";
 import AdminOrders from "./pages/Admin/AdminOrders";
 import AdminUsers from "./pages/Admin/AdminUsers";
