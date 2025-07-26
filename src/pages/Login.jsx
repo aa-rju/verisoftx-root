@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Popup from "../components/popups";
+
+
 
 // Simple email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function Login() {
+
+  // popup
+  const [popup, setPopup] = useState({ show:false, type:"error", message:""});
+
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/profile";
@@ -38,7 +45,7 @@ function Login() {
     if (result.success) {
       navigate(from, { replace: true });
     } else {
-      setError(result.error || "Invalid username or password");
+      setPopup({ show: true, type:"error", message: result.error || "Login failed. Please try again."});
     }
   };
 
@@ -76,14 +83,15 @@ function Login() {
 
     if (data.success) {
       setOtpEmail(signupEmail); // Store the email used for OTP
-      setSignupError("");
+      // setSignupError("");
+      setPopup({ show: true, type:"success", message: "OTP sent successfully! Please check your email."});
       setOtpSent(true);
       setShowOtpPopup(true);
     } else {
-      setSignupError(data.error || "Failed to send OTP. Try again.");
+      setPopup({ show: true, type:"error", message: data.error || "Failed to send OTP. Try again."});
     }
   } catch {
-    setSignupError("Network error. Try again.");
+    setPopup({ show: true, type:"error", message: "Network error. Try again."});
   }
 };
 
@@ -101,14 +109,14 @@ const handleVerifyOtp = async () => {
     if (data.success) {
       setVerified(true);
       setOtpVerifyError("");
-      // alert("OTP Verified! Proceed to signup.");
+      setPopup({ show: true, type:"success", message: "OTP verified successfully! You can now sign up."})
       handleClosePopup();
       navigate("/signup");
     } else {
-      setOtpVerifyError(data.error || "Invalid OTP");
+      setPopup({ show: true, type:"error", message: data.error || "Invalid or expired OTP."});
     }
   } catch {
-    setOtpVerifyError("Network error. Try again.");
+    setPopup({ show: true, type:"error", message: "Network error. Try again."});
   }
 };
 
@@ -118,6 +126,30 @@ const handleVerifyOtp = async () => {
     setOtpSent(false);
     setSignupEmail("");
   };
+
+  // Resend OTP handler
+const handleResendOtp = async () => {
+  setOtpVerifyError("");
+  document.getElementById("otp").value = "";
+  try {
+    const res = await fetch("http://localhost:5000/api/resend-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: otpEmail }),
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      setOtpSent(true);
+      setOtpVerifyError("");
+      setPopup({ show: true, type:"success", message: "OTP resent successfully! Please check your email."});
+    } else {
+      setPopup({ show: true, type:"error", message: data.error || "Failed to resend OTP. Try again."} );
+    }
+  } catch {
+    setPopup({ show: true, type:"error", message: "Network error. Try again."} );
+  }
+};
 
   return (
     <div className="flex justify-center items-top mt-8 bg-gray-100">
@@ -169,6 +201,14 @@ const handleVerifyOtp = async () => {
           </button>
         </div>
       </div>
+
+      {/* popup component */}
+    <Popup
+      show={popup.show}
+      type={popup.type}
+      message={popup.message}
+      onClose={() => setPopup({ show: false, type: "error", message: "" })}
+    />
 
       {/* Signup Popup */}
       {showSignupPopup && (
@@ -229,6 +269,8 @@ const handleVerifyOtp = async () => {
             value={enteredOtp}
             onChange={(e) => setEnteredOtp(e.target.value)}
             maxLength={6}
+            name="otp"
+            id="otp"
             placeholder="Enter OTP"
             className="w-full border px-4 py-2 rounded mb-2 focus:ring-pink-500"
           />
@@ -238,6 +280,22 @@ const handleVerifyOtp = async () => {
           >
             Verify OTP
           </button>
+          <div className="flex justify-end mt-2">
+            {/* popup errors or success */}
+            <Popup
+              show={popup.show}
+              type={popup.type}
+              message={popup.message}
+              onClose={() => setPopup({ show: false, type: "error", message: "" })}
+            />
+            <button
+              type="button"
+              className="text-pink-600 text-sm hover:underline"
+              onClick={handleResendOtp}
+            >
+              Resend OTP
+            </button>
+          </div>
         </>
       )}
     </div>
