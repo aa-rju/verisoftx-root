@@ -10,7 +10,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
-import Profile from "./pages/profile";
+import Footer from "./components/Footer";
+// import Profile from "./pages/profile";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 
@@ -29,10 +30,10 @@ function App() {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <Router>
-        <div className="bg-secondary4 min-h-screen text-gray-800">
+        <div className="bg-secondary2 min-h-screen text-gray-800">
           <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           
-          <div className="px-4 py-6">
+          <div className="px-0 py-0">
             <Routes>
               <Route path="/" element={<Home searchTerm={searchTerm} />} />
               <Route path="/login" element={<Login />} />
@@ -46,14 +47,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/profile"
                 element={
                   <ProtectedRoute>
                     <Profile />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
               <Route path="/forgetpassword" element={<ForgetPassword />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
 
@@ -76,6 +77,7 @@ function App() {
               </Route>
             </Routes>
           </div>
+          <Footer/>
         </div>
       </Router>
     </>

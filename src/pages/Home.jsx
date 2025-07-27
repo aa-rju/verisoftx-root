@@ -1,48 +1,7 @@
 import React,{ useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// const products = [
-//   {
-//     id: 1,
-//     name: "Premium Dog Food",
-//     price: "Rs. 1,200",
-//     image:
-//       "https://th.bing.com/th/id/OIP.6-bhbGKViWY5ncRyfd7bnAAAAA?w=279&h=223&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",
-//   },
-//   {
-//     id: 2,
-//     name: "Organic Biscuits",
-//     price: "Rs. 800",
-//     image: "https://images.unsplash.com/photo-1574158622682-e40e69881006",
-//   },
-//   {
-//     id: 3,
-//     name: "Chew Toy Set",
-//     price: "Rs. 450",
-//     image:
-//       "https://www.bing.com/th/id/OIP.Htu-ypAKxGPi4jAdZqj6pwHaE8?w=149&h=100&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",
-//   },
-//   {
-//     id: 4,
-//     name: "Organic Biscuits",
-//     price: "Rs. 800",
-//     image: "https://images.unsplash.com/photo-1574158622682-e40e69881006",
-//   },
-//   {
-//     id: 5,
-//     name: "Organic Biscuits",
-//     price: "Rs. 800",
-//     image:
-//       "https://www.bing.com/th/id/OIP.jNKk8u5AeCxAslbh6gLgeQHaE8?w=144&h=103&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",
-//   },
-//   {
-//     id: 6,
-//     name: "Organic Biscuits",
-//     price: "Rs. 800",
-//     image: "https://images.unsplash.com/photo-1574158622682-e40e69881006",
-//   },
-// ];
-
+import Carousel from "../components/Carousel";
 function Home({ searchTerm }) {
   const [products, setProducts] = useState([]);
 
@@ -63,18 +22,19 @@ const filteredProducts = Array.isArray(products)
 
 
   return (
-    <div className="bg-white">
-      <div className=" mx-auto object-cover rounded-lg px-8 py-8 bg-secondary3">
-        <h1 className="text-3xl font-bold mb-6 text-secondary2">
+    <div className="bg-secondary2">
+      <Carousel className="mx-auto object-cover px-8 py-8"/>
+      <div className=" md:mx-16 sm:mx-4 object-cover rounded-lg px-8 py-8 bg-secondary2">
+        <h1 className="text-3xl font-bold mb-6 text-primary">
           Featured Products
         </h1>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-10 gap-x-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-y-10 gap-x-6">
       {filteredProducts.map((product) => (
         <div
           key={product.id}
-          className="group bg-secondary2 p-4 rounded-xl shadow hover:shadow-lg hover:-translate-y-1 transition duration-500"
+          className="group bg-secondary4 p-4 rounded-xl shadow hover:shadow-lg hover:-translate-y-1 transition duration-500"
         >
-          <div className="h-50 flex items-center justify-center">
+          <div className="h-60  flex items-center justify-center">
             <img
               src={product.image}
               alt={product.title}

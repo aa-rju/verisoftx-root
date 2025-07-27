@@ -37,7 +37,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
 
           {/* Logo */}
           <div className="flex justify-center py-4">
-            <Link to="/" className="text-2xl font-bold text-pink-600">
+            <Link to="/" className="text-2xl font-bold text-pink-500">
               DogFood
             </Link>
           </div>
@@ -54,27 +54,27 @@ function Navbar({ searchTerm, setSearchTerm }) {
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-pink-600"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-pink-500"
               >
                 <Search size={16} />
               </button>
 
             {/* Nav links */}
-            <Link to="/" className="text-gray-700 hover:text-pink-600">
+            <Link to="/" className="text-gray-700 hover:text-pink-500">
               Home
             </Link>
-            {/* <Link to="/shop" className="text-gray-700 hover:text-pink-600">
+            {/* <Link to="/shop" className="text-gray-700 hover:text-pink-500">
               Shop
             </Link> */}
             <Link
               to="/cart"
-              className="text-gray-700 hover:text-pink-600 flex items-center gap-1"
+              className="text-gray-700 hover:text-pink-500 flex items-center gap-1"
             >
               <ShoppingCart size={18} />
               Cart
             </Link>
             {user && (
-              <Link to="/profile" className="text-gray-700 hover:text-pink-600">
+              <Link to="/profile" className="text-gray-700 hover:text-pink-500">
                 Profile
               </Link>
             )}
@@ -87,7 +87,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
               </button>
             ) : (
               <>
-                <Link to="/login" className="text-gray-700 hover:text-pink-600">
+                <Link to="/login" className="text-gray-700 hover:text-pink-500">
                   Login
                 </Link>
               </>
@@ -110,25 +110,25 @@ function Navbar({ searchTerm, setSearchTerm }) {
             />
             <button
               type="submit"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-pink-600"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-pink-500"
             >
               <Search size={18} />
             </button>
 
 
-          <Link to="/" className="block text-gray-700 hover:text-pink-600">
+          <Link to="/" className="block text-gray-700 hover:text-pink-500">
             Home
           </Link>
-          {/* <Link to="/shop" className="block text-gray-700 hover:text-pink-600">
+          {/* <Link to="/shop" className="block text-gray-700 hover:text-pink-500">
             Shop
           </Link> */}
-          <Link to="/cart" className="block text-gray-700 hover:text-pink-600">
+          <Link to="/cart" className="block text-gray-700 hover:text-pink-500">
             Cart
           </Link>
           {user && (
             <Link
               to="/profile"
-              className="block text-gray-700 hover:text-pink-600"
+              className="block text-gray-700 hover:text-pink-5000"
             >
               Profile
             </Link>
