@@ -3,7 +3,6 @@ import React,{useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
-
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -11,12 +10,14 @@ import Signup from "./pages/Signup";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Footer from "./components/Footer";
-// import Profile from "./pages/profile";
+import Profile from "./pages/Profile";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Offers from "./pages/Offers";
+
 
 // Admin Components
-import AdminRequireAuth from "./components/AdminRequireAuth";
+// import AdminRequireAuth from "./components/AdminRequireAuth";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminProducts from "./pages/Admin/AdminProducts";
@@ -30,7 +31,7 @@ function App() {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <Router>
-        <div className="bg-secondary2 min-h-screen text-gray-800">
+        <div className="bg-secondary6 min-h-screen text-gray-800">
           <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           
           <div className="px-0 py-0">
@@ -39,6 +40,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/offers" element={<Offers />} />
               <Route
                 path="/cart"
                 element={
@@ -47,14 +49,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              {/* <Route
+              <Route
                 path="/profile"
                 element={
                   <ProtectedRoute>
                     <Profile />
                   </ProtectedRoute>
                 }
-              /> */}
+              />
               <Route path="/forgetpassword" element={<ForgetPassword />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
 
@@ -62,9 +64,9 @@ function App() {
               <Route
                 path="/admin"
                 element={
-                  <AdminRequireAuth>
+                  //<AdminRequireAuth>
                     <AdminLayout />
-                  </AdminRequireAuth>
+                  //</AdminRequireAuth>
                 }
               >
                 <Route index element={<AdminDashboard />} />

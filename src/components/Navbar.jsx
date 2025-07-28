@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
+// import SidebarUser from "../components/SidebarUser"
 
 function Navbar({ searchTerm, setSearchTerm }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [searchTerm, setSearchTerm] = useState("");
+
 
   const handleLogout = () => {
     logout();
@@ -29,6 +31,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Mobile menu button */}
+          {/* <sidebarUser onClick={() => navigate("/offers")}>sidebar</sidebarUser> */}
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,17 +93,41 @@ function Navbar({ searchTerm, setSearchTerm }) {
                 <Link to="/login" className="text-gray-700 hover:text-pink-500">
                   Login
                 </Link>
+                <Link to="/signup" className="text-gray-700 hover:text-pink-500">
+                  Sign up
+                </Link>
               </>
+              
             )}
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Backdrop */}
       {isOpen && (
-        <div className="md:hidden px-4 pt-4 pb-4 space-y-2 bg-white shadow-sm ${
-    isOpen ? 'translate-x-0' : '-translate-x-full'">
-          {/* Search bar (mobile) */}
+        <div
+          className="fixed inset-0 bg-black bg-opacity-40 z-40"
+          onClick={() => setIsOpen(false)}
+        ></div>
+      )}
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-0 left-0 h-fit w-40 bg-primary z-50 shadow-lg transform transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+
+
+        <div className="p-4 space-y-4">
+                    <button
+          className="absolute top-4 right-4 m-0 text-white hover:text-red-500"
+          onClick={() => setIsOpen(false)}
+        >
+         <Menu size={24} />
+        </button>
+          {/* Search bar */}
+          <div className="relative py-8">
             <input
               type="text"
               placeholder="Search..."
@@ -114,44 +141,40 @@ function Navbar({ searchTerm, setSearchTerm }) {
             >
               <Search size={18} />
             </button>
+          </div>
 
-
-          <Link to="/" className="block text-gray-700 hover:text-pink-500">
+          <Link to="/" className="block text-white hover:text-pink-500">
             Home
           </Link>
-          {/* <Link to="/shop" className="block text-gray-700 hover:text-pink-500">
-            Shop
-          </Link> */}
-          <Link to="/cart" className="block text-gray-700 hover:text-pink-500">
+          <Link to="/cart" className="block text-white hover:text-pink-500">
             Cart
           </Link>
+
           {user && (
-            <Link
-              to="/profile"
-              className="block text-gray-700 hover:text-pink-5000"
-            >
+            <Link to="/profile" className="block text-white hover:text-pink-500">
               Profile
             </Link>
           )}
           {user ? (
             <button
               onClick={handleLogout}
-              className="block w-full text-left text-gray-700 hover:text-pink-600"
+              className="block w-full text-left text-white hover:text-pink-600"
             >
               Logout
             </button>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="block text-gray-700 hover:text-pink-600"
-              >
+              <Link to="/login" className="block text-white hover:text-pink-600">
                 Login
+              </Link>
+              <Link to="/signup" className="block text-white hover:text-pink-500">
+                Signup
               </Link>
             </>
           )}
         </div>
-      )}
+      </div>
+
       
     </nav>
   );

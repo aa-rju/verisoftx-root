@@ -9,6 +9,8 @@ import {
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const images = [
   "https://static.vecteezy.com/system/resources/previews/045/125/824/non_2x/various-breeds-of-dogs-peek-out-from-behind-a-wooden-fence-concept-for-pets-veterinary-clinic-or-nutrition-food-for-dogs-banner-with-space-for-text-photo.jpg",
@@ -18,13 +20,19 @@ const images = [
 ];
 
 const Carousel = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative w-full">
       {/* Overlay Heading */}
       <div className="absolute top-4 left-1/4 -translate-x-1/2 z-10">
-        <h1 className="text-white text-3xl font-bold bg-primary/50 px-4 py-2 rounded-lg shadow-lg">
+        {/* <h1 className="text-white text-3xl font-bold bg-primary/50 px-4 py-2 rounded-lg shadow-lg">
           Grab Now!
-        </h1>
+        </h1> */}
+
+        <Button
+        onClick={() => navigate("/offers")}>Grab now</Button>
+        
+
       </div>
 
       {/* Swiper Slider */}

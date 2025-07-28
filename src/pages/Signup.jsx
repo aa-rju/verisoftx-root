@@ -6,8 +6,7 @@ function Signup() {
   const { signup } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
+    Username: "",
     phone: "",
     address: "",
     city: "",
@@ -46,17 +45,18 @@ function Signup() {
         {error && <p className="text-red-500 mb-2">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
-            name="first_name"
+            name="Username"
             onChange={handleChange}
             required
-            placeholder="First Name"
+            placeholder="User Name"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
           />
           <input
-            name="last_name"
+            name="email"
             onChange={handleChange}
+            type="email"
             required
-            placeholder="Last Name"
+            placeholder="Email"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
           />
           <input
@@ -66,35 +66,35 @@ function Signup() {
             placeholder="Phone Number"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
           />
-          <input
+          {/* <input
             name="city"
             onChange={handleChange}
             type="text"
             required
             placeholder="City"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
-          />
-          <input
+          /> */}
+          {/* <input
             name="state"
             onChange={handleChange}
             required
             placeholder="State"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
-          />
-          <input
+          /> */}
+          {/* <input
             name="zip"
             onChange={handleChange}
             required
             placeholder="Zip Code"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
-          />
-          <input
+          /> */}
+          {/* <input
             name="country"
             onChange={handleChange}
             required
             placeholder="Country"
             className="w-full border px-4 py-2 rounded focus:ring-pink-500"
-          />
+          /> */}
           <input
             name="password"
             onChange={handleChange}

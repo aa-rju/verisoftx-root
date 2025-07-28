@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Popup from "../components/popups";
 
-
-
 // Simple email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -30,7 +28,7 @@ function Login() {
   // otp verification state
   const [enteredOtp, setEnteredOtp] = useState("");
   const [otpVerifyError, setOtpVerifyError] = useState("");
-  const [verified, setVerified] = useState(false);
+  const [ setVerified] = useState(false);
 
   // forgot password popup window
   const [showForgotPopup, setShowForgotPopup] = useState(false);
@@ -156,11 +154,15 @@ const handleForgotResetPassword = async () => {
   };
 
   // Signup popup handlers
+  // const handleSignupClick = (e) => {
+  //   e.preventDefault();
+  //   setShowSignupPopup(true);
+  //   setSignupError("");
+  //   setOtpSent(false);
+  // };
   const handleSignupClick = (e) => {
     e.preventDefault();
-    setShowSignupPopup(true);
-    setSignupError("");
-    setOtpSent(false);
+    navigate("/signup"); // redirects to /signup route
   };
 
   const handleSignupEmailChange = (e) => {
@@ -169,7 +171,7 @@ const handleForgotResetPassword = async () => {
     setOtpSent(false);
   };
 
-  const [showOtpPopup, setShowOtpPopup] = useState(false);
+  const [setShowOtpPopup] = useState(false);
 
   const handleSendOtp = async () => {
   if (!emailRegex.test(signupEmail)) {

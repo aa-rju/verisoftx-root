@@ -10,6 +10,7 @@ module.exports = {
         secondary3: "#48ccdb",
         secondary4: "#fff3d9",
         secondary5:"#661fff",
+        secondary6:"#fffdcb",
         // Add more custom colors here
       },
     },

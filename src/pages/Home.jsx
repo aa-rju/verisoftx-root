@@ -22,13 +22,13 @@ const filteredProducts = Array.isArray(products)
 
 
   return (
-    <div className="bg-secondary2">
+    <div className="bg-secondary6">
       <Carousel className="mx-auto object-cover px-8 py-8"/>
-      <div className=" md:mx-16 sm:mx-4 object-cover rounded-lg px-8 py-8 bg-secondary2">
+      <div className=" md:mx-16 sm:mx-4 object-cover rounded-lg px-8 py-8 bg-secondary6/50">
         <h1 className="text-3xl font-bold mb-6 text-primary">
           Featured Products
         </h1>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-y-10 gap-x-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-6">
       {filteredProducts.map((product) => (
         <div
           key={product.id}

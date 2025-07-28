@@ -3,9 +3,9 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn,FaYoutube } from "react-icons/fa
 
 const Footer = () => {
   return (
-    <div className="relative mt-16 bg-secondary5">
+    <div className="relative mt-16 bg-secondary2">
       <svg
-        className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-secondary5"
+        className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-secondary2"
         preserveAspectRatio="none"
         viewBox="0 0 1440 54"
       >
