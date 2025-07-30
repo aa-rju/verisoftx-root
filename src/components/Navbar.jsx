@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import logo from "../../src/assets/bluedoglogo.png"
 // import SidebarUser from "../components/SidebarUser"
 
 function Navbar({ searchTerm, setSearchTerm }) {
@@ -27,7 +28,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
   // };
 
   return (
-    <nav className="bg-secondary2 shadow-sm sticky top-0 z-50">
+    <nav className="bg-secondary2 shadow-sm sticky top-0 z-50 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Mobile menu button */}
@@ -39,11 +40,13 @@ function Navbar({ searchTerm, setSearchTerm }) {
           </div>
 
           {/* Logo */}
-          <div className="flex justify-center py-4">
-            <Link to="/" className="text-2xl font-bold text-pink-500">
-              DogFood
+          <div className="flex flex-row justify-center items-center py-4">
+            <Link to="/" className="flex items-center space-x-2">
+            <img src={logo} alt="Logo" className="w-32 h-auto bg-transparent" />
+            <p className="text-[20px] text-pink-500 font-bold">BlueDogTreats</p>
             </Link>
-          </div>
+            </div>
+
 
           {/* Desktop nav and search */}
           <div className="hidden md:flex items-center space-x-4">

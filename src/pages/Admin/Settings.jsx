@@ -1,7 +1,7 @@
 import React from "react";
 
-const EditProduct = () => {
+const Settings = () => {
   return <div>EditProduct</div>;
 };
 
-export default EditProduct;
+export default Settings;

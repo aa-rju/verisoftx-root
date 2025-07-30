@@ -15,15 +15,32 @@ import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Offers from "./pages/Offers";
 
+// footer pages
+import AboutUs from "./pages/Footer/AboutUs";
+import FAQ from "./pages/Footer/FAQs";
+import TreatDeals from "./pages/Footer/TreatDeals";
+import SubscribeandSave from "../src/pages/Footer/SubscribeandSave"
+import ChewSelector from "./pages/Footer/ChewSelector";
+import Referralpoints from "./pages/Footer/Referralpoints";
+
+import TermsofService from "./pages/Footer/TermsofService"
+import PrivacyPolicy from "./pages/Footer/PrivacyPolicy";
+import RefundPolicy from "./pages/Footer/RefundPolicy";
+import ConsumerPrivacyAct from "./pages/Footer/ConsumerPrivacyAct";
+import Resources from "./pages/Footer/Resources";
+import ContactUs from "./pages/Footer/ContactUs";
+
 
 // Admin Components
 // import AdminRequireAuth from "./components/AdminRequireAuth";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminProducts from "./pages/Admin/AdminProducts";
-import EditProduct from "./pages/Admin/EditProduct";
+// import EditProduct from "./pages/Admin/EditProduct";
 import AdminOrders from "./pages/Admin/AdminOrders";
 import AdminUsers from "./pages/Admin/AdminUsers";
+
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -41,6 +58,21 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/offers" element={<Offers />} />
+              {/* footer pages */}
+              <Route path="/aboutus" element={<AboutUs/>} />
+              <Route path="/chewselector" element={<ChewSelector/>} />
+              <Route path="/faq" element={<FAQ/>} />
+              <Route path="/referralpoints" element={<Referralpoints/>} />
+              <Route path="/subscribeandsave" element={<SubscribeandSave/>} />
+              <Route path="/treatdeals" element={<TreatDeals/>} />
+
+              <Route path="/termsofservice" element={<TermsofService/>} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
+              <Route path="/refundpolicy" element={<RefundPolicy/>} />
+              <Route path="/consumerprivacyact" element={<ConsumerPrivacyAct/>} />
+              <Route path="/resources" element={<Resources/>} />
+              <Route path="/contactus" element={<ContactUs/>} />
+
               <Route
                 path="/cart"
                 element={
@@ -72,7 +104,7 @@ function App() {
                 <Route index element={<AdminDashboard />} />
                 <Route path="products" element={<AdminProducts />} />
                 {/* <Route path="products/add" element={<AddProduct />} /> */}
-                <Route path="products/edit/:id" element={<EditProduct />} />
+                {/* <Route path="products/edit/:id" element={<EditProduct />} /> */}
                 <Route path="orders" element={<AdminOrders />} />
                 <Route path="users" element={<AdminUsers />} />
                 {/* Add more admin routes as needed */}
