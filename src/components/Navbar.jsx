@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
 import logo from "../../src/assets/bluedoglogo.png"
 // import SidebarUser from "../components/SidebarUser"
 
@@ -62,7 +62,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
                 type="submit"
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-pink-500"
               >
-                <Search size={16} />
+                
               </button>
 
             {/* Nav links */}
@@ -142,7 +142,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
               type="submit"
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-pink-500"
             >
-              <Search size={18} />
+              
             </button>
           </div>
 
