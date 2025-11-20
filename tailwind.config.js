@@ -11,6 +11,12 @@ module.exports = {
         secondary4: "#fff3d9",
         secondary5:"#661fff",
         secondary6:"#fffdcb",
+        color1:"#00b1df",
+        color2:"#f6d300",
+        color3:"#fd076b",
+        footer:"#fffdcb",
+        footer2:"#fffdcb",
+  
         // Add more custom colors here
       },
     },

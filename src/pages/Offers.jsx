@@ -3,28 +3,56 @@ import { Link } from "react-router-dom";
 const offers = [
   {
     id: 1,
-    title: "Your Dogs fav. Mochi",
+    title: "Web Development",
     offerPrice: 1499,
     originalPrice: 2999,
     image: "https://www.bing.com/th/id/OIP.26jfL6Q_LQGPeVWapx9rJwHaGu?w=198&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
   },
   {
     id: 2,
-    title: "Peaches",
+    title: "Mobile App Development",
     offerPrice: 999,
     originalPrice: 1999,
     image: "https://www.bing.com/th/id/OIP.gghuQhPtmKmFFp6i1ETGBQHaLx?w=160&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
   },
     {
     id: 3,
-    title: "Your Dogs fav. Mochi",
+    title: "CMS Development",
     offerPrice: 1499,
     originalPrice: 2999,
     image: "https://www.bing.com/th/id/OIP.26jfL6Q_LQGPeVWapx9rJwHaGu?w=198&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
   },
     {
     id: 4,
-    title: "Peaches",
+    title: "Desktop App Development",
+    offerPrice: 999,
+    originalPrice: 1999,
+    image: "https://www.bing.com/th/id/OIP.gghuQhPtmKmFFp6i1ETGBQHaLx?w=160&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
+  },
+      {
+    id: 4,
+    title: "Social Media Marketing",
+    offerPrice: 999,
+    originalPrice: 1999,
+    image: "https://www.bing.com/th/id/OIP.gghuQhPtmKmFFp6i1ETGBQHaLx?w=160&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
+  },
+      {
+    id: 4,
+    title: "Graphics Design",
+    offerPrice: 999,
+    originalPrice: 1999,
+    image: "https://www.bing.com/th/id/OIP.gghuQhPtmKmFFp6i1ETGBQHaLx?w=160&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
+  },
+      {
+    id: 4,
+    title: "Web Hosting",
+    offerPrice: 999,
+    originalPrice: 1999,
+    image: "https://www.bing.com/th/id/OIP.gghuQhPtmKmFFp6i1ETGBQHaLx?w=160&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
+  },
+      {
+    id: 4,
+    title: "Domain Name Registration",
     offerPrice: 999,
     originalPrice: 1999,
     image: "https://www.bing.com/th/id/OIP.gghuQhPtmKmFFp6i1ETGBQHaLx?w=160&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3",
@@ -35,7 +63,7 @@ const offers = [
 const Offers = () => {
   return (
     // <div className="min-h-screen bg-gray-100 p-6">
-    //   <h2 className="text-3xl font-bold mb-6 text-center text-pink-600">Exclusive Offers</h2>
+    //   <h2 className="text-3xl font-bold mb-6 text-center text-pink-600">Our Services</h2>
     //   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     //     {offers.map((item) => (
     //       <div
@@ -55,8 +83,8 @@ const Offers = () => {
     //     ))}
     //   </div>
     // </div>
-    <div className="px-20 py-10 bg-secondary6/50">
-        <h2 className="text-3xl font-bold mb-6 text-center text-pink-600">Exclusive Offers</h2>
+    <div className="px-20 py-10 bg-black/50">
+        <h2 className="text-3xl font-bold mb-6 text-center text-white">Our Services</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-6">
       {offers.map((product) => (
         <div
@@ -84,7 +112,7 @@ const Offers = () => {
             to={`/product/${product.id}`}
             className="mt-3 inline-block text-sm font-medium hover:text-white border px-2 py-3 rounded-md bg-white hover:bg-pink-600 transition duration-500"
           >
-            Buy Now
+            Click To know More
           </Link>
         </div>
       ))}

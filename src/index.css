@@ -4,3 +4,6 @@
 .input {
   @apply w-full border border-gray-300 p-2 rounded;
 }
+html, body {
+  overflow-x: hidden;
+}
