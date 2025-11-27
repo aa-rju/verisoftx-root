@@ -5,10 +5,10 @@ import { ExternalLink, X } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Infant Health Monitoring System",
-    subtitle: "Real-time NICU Biophysiological Data Tracking",
+    title: "Smart Dine",
+    subtitle: "Restaurent Management webapp",
     description:
-      "A web-based platform built for NICU environments that continuously monitors and visualizes infants’ physiological signals. Developed with React, Node.js, and MongoDB.",
+      "A web-based Restaurent Management system created to solve the problem faced  in the management of Large Restaurents ",
     image:
       "https://img.freepik.com/foto-gratis/composicion-moderna-mecanico-automoviles_23-2147881304.jpg",
     tags: ["React", "Node.js", "IoT", "Healthcare"],
