@@ -10,49 +10,27 @@ const projects = [
     description:
       "A web-based Restaurent Management system created to solve the problem faced  in the management of Large Restaurents ",
     image:
-      "https://img.freepik.com/foto-gratis/composicion-moderna-mecanico-automoviles_23-2147881304.jpg",
+      "https://www.bing.com/th/id/OIP.0IpY3tWQ4XFBP_7QYRSX0wHaFt?w=203&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",
     tags: ["React", "Node.js", "IoT", "Healthcare"],
     link: "https://subcashh.com/",
   },
   {
     id: 2,
-    title: "GIF Generator App",
-    subtitle: "Fun with APIs and Custom Hooks",
+    title: "TLO Management",
+    subtitle: "TLO Management System",
     description:
-      "An interactive GIF generator that fetches random or tag-based GIFs using Giphy API. Developed using React + Vite and Tailwind CSS.",
+      "The TriveniMargTLO website serves as a community‑level portal for residents of Dharan, enabling them to locate and engage with their local neighbourhood organization (TLO) by selecting their ward and “tole” (neighborhood).",
     image:
       "https://static.vecteezy.com/system/resources/previews/035/194/282/large_2x/domain-name-system-concept-dns-website-domain-name-internet-or-cyberspace-domain-registration-web-page-choose-find-buy-register-website-domain-name-flat-illustration-vector.jpg",
     tags: ["React", "API", "Custom Hooks"],
-    link: "http://ww25.trivenimargtlo.com/?subid1=20251025-0214-38fc-9aaf-892594ec53e8",
+    link: "https://trivenimargtlo.com/",
   },
   {
     id: 3,
-    title: "Volunteer Connect Platform",
-    subtitle: "Empathy-driven Mental Health Support",
-    description:
-      "A platform connecting volunteers and seekers for mental health support, built using MongoDB, Express, React, and Node.js.",
-    image:
-      "https://tse4.mm.bing.net/th/id/OIP.kuT61wHcfl3YYpey82W1HQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
-    tags: ["MERN Stack", "Mental Health", "Community"],
-    link: "https://learnologyempire.com/",
-  },
-  {
-    id: 4,
-    title: "Kanahaya Dairy",
-    subtitle: "Empathy-driven Mental Health Support",
-    description:
-      "A platform connecting volunteers and seekers for mental health support, built using MongoDB, Express, React, and Node.js.",
-    image:
-      "https://cdn.firstcry.com/education/2022/11/07145239/Dairy-Product-List-For-Kids-with-their-Benefits-And-Facts.jpg",
-    tags: ["MERN Stack", "Mental Health", "Community"],
-    link: "https://verisoftx.com/",
-  },
-  {
-    id: 5,
     title: "DogFood E-commerce",
-    subtitle: "Empathy-driven Mental Health Support",
+    subtitle: "Find all your Dogs-treat here.",
     description:
-      "A platform connecting volunteers and seekers for mental health support, built using MongoDB, Express, React, and Node.js.",
+      "BlueDogTreats is an online pet‑treat store based in Bagmati, Nepal that offers a variety of dog food and treats — from crunchy chews to meat‑ and cheese‑based snacks.",
     image:
       "https://cdn.dribbble.com/users/6579959/screenshots/20573771/media/ebe42fab6b2727763394715bdbeaec98.jpg?resize=400x0",
     tags: ["MERN Stack", "Mental Health", "Community"],
